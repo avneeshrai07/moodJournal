@@ -32,6 +32,8 @@ const WriteNew = () => {
         visibility: visibility,
         author_id: authorId,
       });
+      console.log("title: ",title);
+      console.log("content: ", content);
     } catch (error) {
       console.log("Error posting post data to the server", error);
     }
