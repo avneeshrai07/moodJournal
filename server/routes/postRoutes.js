@@ -6,7 +6,12 @@ const { Comment } = require("../models/Comment");
 const analyze = require("../utils/nlp");
 
 router.get("/s-analyzer", (req, res) => {
-  const content = req.params["content"];
+  const { content } = req.query;
+  if (!content) {
+    return res
+      .status(400)
+      .json({ error: "Content query parameter is required" });
+  }
   const sentiment = analyze(content);
   res.status(200).json({ sentiment });
 });
