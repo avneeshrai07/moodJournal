@@ -2,13 +2,15 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDd84zVx8J6Owiq24F01JNM_CtUq5F8Uqw",
-  authDomain: "mood-journal-2f027.firebaseapp.com",
-  projectId: "mood-journal-2f027",
-  storageBucket: "mood-journal-2f027.appspot.com",
-  messagingSenderId: "741528644145",
-  appId: "1:741528644145:web:6f0cdfdbc015e83a28c310",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
+
+console.log("Firebase API Key:", process.env.REACT_APP_FIREBASE_API_KEY);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

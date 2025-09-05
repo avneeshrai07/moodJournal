@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "client-install": "cd client && npm install",
-    "server-install": "cd server && npm install", 
+    "server-install": "cd server && npm install",
     "start": "node server/index.js",
     "server": "nodemon server/index.js",
     "client": "cd client && npm start",
@@ -26,7 +26,7 @@
     "body-parser": "^1.20.2",
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.6.1",
     "express": "^4.18.2",
     "firebase-admin": "^11.5.0",
     "mongoose": "^7.0.2",

@@ -2,9 +2,7 @@ const mongoose = require("mongoose");
 
 const connectDb = async () => {
   try {
-    const conn = await mongoose.connect(
-      "mongodb://localhost:27017/moodJournal"
-    );
+    const conn = await mongoose.connect(process.env.MONGO_URI);
     console.log(`MongoDB connected: ${conn.connection.host}`);
   } catch (error) {
     console.log(`Unable to connect to MongoDB: ${error.message}`);

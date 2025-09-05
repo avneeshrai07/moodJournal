@@ -3,6 +3,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv").config({ path: "./server/.env" });
 const connectDb = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const postRoutes = require("./routes/postRoutes");
