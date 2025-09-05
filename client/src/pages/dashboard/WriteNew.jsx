@@ -12,34 +12,38 @@ const WriteNew = () => {
   const [content, setContent] = useState("");
   const [visibility, setVisibility] = useState(false);
 
+  if (!user || !user.email) {
+    return (
+      <DashboardLayout>
+        <div>Loading...</div>
+      </DashboardLayout>
+    );
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let authorId = "";
     try {
-      const authResponse = await axios.get("auth/get-user-by-email", {
-        params: {
-          email: user.email,
+      const token = await user.getIdToken();
+      await axios.post(
+        "post/new",
+        {
+          title: title,
+          content: content,
+          visibility: visibility,
         },
-      });
-      authorId = authResponse.data[0]._id;
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setTitle("");
+      setContent("");
+      alert("Post Submitted!");
     } catch (error) {
-      console.log("Error fetching user by email", error);
+      console.log("Error creating post", error);
+      alert("An error occurred while submitting the post.");
     }
-    try {
-      await axios.post("post/new", {
-        title: title,
-        content: content,
-        visibility: visibility,
-        author_id: authorId,
-      });
-      console.log("title: ",title);
-      console.log("content: ", content);
-    } catch (error) {
-      console.log("Error posting post data to the server", error);
-    }
-    setTitle("");
-    setContent("");
-    alert("Post Submitted!");
   };
 
   return (

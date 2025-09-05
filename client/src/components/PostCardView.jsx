@@ -7,7 +7,10 @@ import axios from "axios";
 const PostCardView = ({ post, isPrivate, deletePostFromArray }) => {
   const { _id, title, content, date, sentiment } = post;
   const navigate = useNavigate();
-  let sentimentDecimal = Number(sentiment.$numberDecimal);
+  let sentimentDecimal = 0;
+  if (sentiment && sentiment.$numberDecimal) {
+    sentimentDecimal = Number(sentiment.$numberDecimal);
+  }
   let variant = "Warning";
   if (sentimentDecimal > 0) variant = "Success";
   else if (sentimentDecimal < 0) variant = "Danger";

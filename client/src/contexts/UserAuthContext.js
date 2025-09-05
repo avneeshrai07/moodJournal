@@ -45,8 +45,10 @@ export const UserAuthContextProvider = ({ children }) => {
     return userImpl;
   };
 
-  const logIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
+  const logIn = async (email, password) => {
+    const userImpl = await signInWithEmailAndPassword(auth, email, password);
+    await addUserToDatabase(userImpl);
+    return userImpl;
   };
 
   const signInWithGoogle = async () => {

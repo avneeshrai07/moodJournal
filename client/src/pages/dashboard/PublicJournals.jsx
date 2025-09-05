@@ -39,7 +39,7 @@ const PublicJournals = () => {
             </div>
             <div>
               {posts.map((post) => {
-                return <PostCardView post={post} isPrivate={false} />;
+                return <PostCardView key={post._id} post={post} isPrivate={false} />;
               })}
             </div>
           </div>

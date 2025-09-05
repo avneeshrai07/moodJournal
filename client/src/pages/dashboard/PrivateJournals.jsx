@@ -3,7 +3,6 @@ import DashboardLayout from "../../components/DashboardLayout";
 import axios from "axios";
 import PostCardView from "../../components/PostCardView";
 import { useUserAuth } from "../../contexts/UserAuthContext";
-import { Container } from "react-bootstrap";
 
 const PrivateJournals = () => {
   const [loading, setLoading] = useState(true);
@@ -45,7 +44,7 @@ const PrivateJournals = () => {
     };
 
     fetchData();
-  }, []);
+  }, [posts, user.email]);
 
   return (
     <DashboardLayout>

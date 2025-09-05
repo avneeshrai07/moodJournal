@@ -4,6 +4,7 @@ const router = express.Router();
 const Post = require("../models/Post");
 const { Comment } = require("../models/Comment");
 const analyze = require("../utils/nlp");
+const { protect } = require("../middleware/authMiddleware");
 
 router.get("/s-analyzer", (req, res) => {
   const { content } = req.query;
@@ -36,24 +37,29 @@ router.get("/get-post-by-id", async (req, res) => {
   res.status(200).json(post);
 });
 
-router.post("/new", async (req, res) => {
-  const { title, content, visibility, author_id } = req.body;
-  const sentiment = analyze(content);
-  const date = new Date(Date.now());
+router.post("/new", protect, async (req, res) => {
+  try {
+    const { title, content, visibility } = req.body;
+    const sentiment = analyze(content);
+    const date = new Date(Date.now());
 
-  const newPost = new Post({
-    title: title,
-    content: content,
-    visibility: visibility,
-    author_id: author_id,
-    likes_count: 0,
-    date: date,
-    sentiment: sentiment,
-    comments: [],
-  });
-  await newPost.save();
+    const newPost = new Post({
+      title: title,
+      content: content,
+      visibility: visibility,
+      author_id: req.user._id,
+      likes_count: 0,
+      date: date,
+      sentiment: sentiment,
+      comments: [],
+    });
+    await newPost.save();
 
-  res.sendStatus(200);
+    res.status(201).json({ success: true, msg: "Post created successfully" });
+  } catch (error) {
+    console.error("Error creating post:", error);
+    res.status(500).json({ success: false, msg: "Failed to create post", error: error.message });
+  }
 });
 
 router.delete("/delete/:id", async (req, res) => {
