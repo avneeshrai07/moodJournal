@@ -44,7 +44,7 @@ const PrivateJournals = () => {
     };
 
     fetchData();
-  }, [posts, user.email]);
+  }, [user.email]);
 
   return (
     <DashboardLayout>

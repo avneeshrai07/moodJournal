@@ -39,7 +39,7 @@ const Insights = () => {
     };
 
     fetchData();
-  }, [user.email, posts]);
+  }, [user.email]);
 
   return (
     <>

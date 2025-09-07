@@ -26,7 +26,7 @@ router.get("/get-posts-by-user", async (req, res) => {
   const userId = req.query["user_id"];
   console.log("query user", userId);
   const id = new mongoose.Types.ObjectId(userId);
-  const userPosts = await Post.find({ author_id: id });
+  const userPosts = await Post.find({ author_id: id, visibility: false });
   res.status(200).send(userPosts);
 });
 
